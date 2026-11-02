@@ -50,7 +50,7 @@ cefr-a2b/
 │   └── system-ask.md              # System prompt for multi-turn AI Q&A
 ├── public/
 │   ├── api.php                    # PHP backend endpoint for OpenAI Responses API
-│   └── config.sample.php          # Sample PHP backend configuration
+│   └── config.openai.php          # PHP backend configuration (reads OPENAI_API_KEY)
 ├── scripts/
 │   └── dev-php.js                 # Dev launcher for PHP's built-in web server
 ├── src/
@@ -88,26 +88,16 @@ cefr-a2b/
 npm install
 ```
 
-### 2. Configure the PHP backend
+### 2. Set your OpenAI API key
 
-Copy `public/config.sample.php` to `public/config.php` (which is git-ignored) and set your OpenAI API key, or export the `OPENAI_API_KEY` environment variable:
+Set the `OPENAI_API_KEY` environment variable in your OS or shell before starting the dev server (`public/config.openai.php` reads it automatically; model and reasoning settings can also be adjusted there):
 
 ```bash
-cp public/config.sample.php public/config.php
-```
+# macOS / Linux
+export OPENAI_API_KEY="sk-proj-your-api-key"
 
-```php
-<?php
-// public/config.php
-$model = 'gpt-6.1-terra';
-$reasoningEffort = 'medium'; // low | medium | high | xhigh | none
-
-return [
-    'api_key' => getenv('OPENAI_API_KEY') ?: 'sk-proj-your-api-key',
-    'model' => $model,
-    'reasoning_effort' => $reasoningEffort,
-    'timeout' => 25,
-];
+# Windows (PowerShell)
+$env:OPENAI_API_KEY="sk-proj-your-api-key"
 ```
 
 ### 3. Start the development servers
@@ -131,12 +121,12 @@ This single command concurrently launches:
 npm run build
 ```
 
-Vite compiles TypeScript and bundles static assets—alongside `public/api.php` and `public/config.sample.php`—into the `dist/` directory.
+Vite compiles TypeScript and bundles static assets—alongside `public/api.php` and `public/config.openai.php`—into the `dist/` directory.
 
 ### 2. Deploy to a PHP-capable web server
 
 1. Upload the contents of `dist/` to your web server's public directory (e.g., `public_html/`).
-2. Upload the `prompt/` directory (`system.md` and `system-ask.md`) **one level above** the directory containing `api.php` (i.e., `../prompt/` relative to `api.php`), keeping system instructions outside public web access:
+2. Upload the `prompt/` directory (`system.md` and `system-ask.md`) **one level above** the directory containing `api.php` (i.e., `../prompt/` relative to `api.php`):
    ```text
    /your-server-root/
    ├── prompt/
@@ -145,10 +135,10 @@ Vite compiles TypeScript and bundles static assets—alongside `public/api.php` 
    └── public_html/          # Document root (contents of dist/)
        ├── index.html
        ├── api.php
-       ├── config.php        # Or config.sample.php + environment variable
+       ├── config.openai.php
        └── assets/
    ```
-3. Provide your OpenAI API key either by creating `config.php` next to `api.php` or by setting the `OPENAI_API_KEY` environment variable on the server (e.g., `SetEnv OPENAI_API_KEY "..."` in `.htaccess`).
+3. Provide the `OPENAI_API_KEY` environment variable on the server (e.g., `SetEnv OPENAI_API_KEY "..."` in `.htaccess`).
 
 ---
 

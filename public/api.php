@@ -31,10 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // 設定ファイルの読み込み
-$configFile = __DIR__ . '/config.php';
-if (!file_exists($configFile)) {
-    $configFile = __DIR__ . '/config.sample.php';
-}
+$configFile = __DIR__ . '/config.openai.php';
 
 if (!file_exists($configFile)) {
     http_response_code(500);
@@ -48,10 +45,10 @@ $model = $config['model'] ?? 'gpt-6.1-terra';
 $reasoningEffort = $config['reasoning_effort'] ?? ($config['thinking_level'] ?? 'medium');
 $timeout = $config['timeout'] ?? 25;
 
-if (empty($apiKey) || $apiKey === 'YOUR_OPENAI_API_KEY_HERE') {
+if (empty($apiKey)) {
     http_response_code(400);
     echo json_encode([
-        'error' => 'OpenAI APIキーが設定されていません。public/config.php を作成または編集し、有効な API キーを設定するか、環境変数 OPENAI_API_KEY を設定してください。'
+        'error' => 'OpenAI APIキーが設定されていません。環境変数 OPENAI_API_KEY を設定してください。'
     ]);
     exit;
 }
