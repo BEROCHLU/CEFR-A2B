@@ -26,7 +26,7 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
   - Maintains multi-turn conversation and reasoning context via OpenAI's `previous_response_id` and automatic context compaction, rendered cleanly in Markdown.
   - Bookmark helpful Q&A exchanges to review anytime or jump directly back to the associated question.
 - **English Voice Input**
-  - Built-in microphone support (`en-US`) powered by the browser's Web Speech API for speaking-based composition practice, plus a standalone `SpeechPractice` React component with Longest Common Subsequence (LCS) word-matching utilities.
+  - Built-in microphone support (`en-US`) powered by the browser's Web Speech API for speaking-based composition practice, plus an optional standalone `SpeechPractice` React component with Longest Common Subsequence (LCS) word-matching utilities.
 - **Zero-Signup Local Persistence**
   - Tracks per-dataset completion progress and saved Q&A bookmarks in `localStorage`, complete with a filterable progress modal (`All` / `Uncompleted` / `Completed`) and direct question jumping.
 
@@ -34,8 +34,8 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 
 ## Tech Stack
 
-- **Frontend**: TypeScript, Vite, React 19, Marked, Web Speech API, CSS3
-- **Backend**: PHP (`cURL` proxy to `https://api.openai.com/v1/responses`)
+- **Frontend**: TypeScript (Vanilla DOM main app + standalone React 19 component), Vite 8, Marked, Web Speech API, CSS3
+- **Backend**: PHP 8.5 (`cURL` proxy to `https://api.openai.com/v1/responses`)
 - **AI Integration**: OpenAI Responses API (Structured Outputs & Stateful Multi-Turn Responses)
 
 ---
@@ -44,21 +44,25 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 
 ```text
 cefr-a2b/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml             # Manual FTPS deployment workflow (GitHub Actions)
 ├── index.html                     # Application entry HTML
 ├── prompt/
 │   ├── system.md                  # System prompt for composition evaluation
 │   └── system-ask.md              # System prompt for multi-turn AI Q&A
 ├── public/
-│   ├── api.php                    # PHP backend endpoint for OpenAI Responses API
+│   ├── api.php                    # PHP 8.5 backend endpoint for OpenAI Responses API
 │   └── config.openai.php          # PHP backend configuration (reads OPENAI_API_KEY)
 ├── scripts/
 │   └── dev-php.js                 # Dev launcher for PHP's built-in web server
 ├── src/
-│   ├── main.tsx                   # Core state management, UI logic, and API client
+│   ├── main.tsx                   # Core state management, DOM UI logic, and API client
 │   ├── style.css                  # Application stylesheet
 │   ├── types.ts                   # TypeScript type definitions
+│   ├── version.ts                 # Standalone application version constant
 │   ├── components/
-│   │   └── SpeechPractice.tsx     # React speech practice & LCS scoring component
+│   │   └── SpeechPractice.tsx     # Optional standalone React speech practice component
 │   ├── data/
 │   │   ├── phrases-u2.ts          # Basic dataset (150 items)
 │   │   ├── phrases-u3.ts          # Standard dataset (152 items)
@@ -74,8 +78,8 @@ cefr-a2b/
 
 ## Prerequisites
 
-- **Node.js** (v20+ recommended) & **npm**
-- **PHP** (7.4+ or 8.x+ with `curl` and `mbstring` extensions enabled)
+- **Node.js** (v22.12+ or v24+ recommended) & **npm**
+- **PHP 8.5** (with `curl` and `mbstring` extensions enabled)
 - An **OpenAI API key**
 
 ---
@@ -125,20 +129,20 @@ Vite compiles TypeScript and bundles static assets—alongside `public/api.php` 
 
 ### 2. Deploy to a PHP-capable web server
 
-1. Upload the contents of `dist/` to your web server's public directory (e.g., `public_html/`).
-2. Upload the `prompt/` directory (`system.md` and `system-ask.md`) **one level above** the directory containing `api.php` (i.e., `../prompt/` relative to `api.php`):
+1. Upload the contents of `dist/` to your target public directory, and upload `prompt/` (`system.md` and `system-ask.md`) **one level above** the directory containing `api.php` (i.e., `../prompt/` relative to `api.php`):
    ```text
    /your-server-root/
    ├── prompt/
    │   ├── system.md
    │   └── system-ask.md
-   └── public_html/          # Document root (contents of dist/)
+   └── dist/                 # Publicly served directory (or public_html/)
        ├── index.html
        ├── api.php
        ├── config.openai.php
        └── assets/
    ```
-3. Provide the `OPENAI_API_KEY` environment variable on the server (e.g., `SetEnv OPENAI_API_KEY "..."` in `.htaccess`).
+   *(If `prompt/` resides inside `public_html/`, block direct HTTP access to `.md` files via `.htaccess`, e.g., `<FilesMatch "\.md$"> Require all denied </FilesMatch>`. Automated FTPS deployment is also configured in `.github/workflows/deploy.yml`.)*
+2. Provide the `OPENAI_API_KEY` environment variable on the server (e.g., `SetEnv OPENAI_API_KEY "..."` in `.htaccess`).
 
 ---
 
