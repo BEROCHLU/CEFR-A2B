@@ -1239,3 +1239,20 @@ footer {
   background-color: var(--primary);
   color: #ffffff;
 }
+
+
+.qa-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-version {
+  position: absolute;
+  right: 0;
+  font-size: 0.72rem;
+  line-height: 1;
+  color: #64748b;
+  user-select: none;
+}

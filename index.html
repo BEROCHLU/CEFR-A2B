@@ -91,9 +91,12 @@
 
       <!-- Q&A with AI Coach -->
       <div class="qa-section">
-        <button id="qa-toggle" class="qa-toggle">
-          💬 この問題についてAIに質問する
-        </button>
+        <div class="qa-header">
+          <button id="qa-toggle" class="qa-toggle">
+            💬 この問題についてAIに質問する
+          </button>
+          <span class="app-version" id="app-version"></span>
+        </div>
         <div id="qa-container" class="qa-container hidden">
           <!-- 質問と回答のスレッド一覧 -->
           <div id="qa-thread" class="qa-thread"></div>

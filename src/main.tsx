@@ -4,6 +4,7 @@ import { phrases as u3StandardPhrases } from './data/phrases-u3';
 import { phrases as u3ExtraPhrases } from './data/phrases-u3-extra';
 import { phrases as u2Phrases } from './data/phrases-u2';
 import type { DatasetConfigItem, FlattenedQuestion, BookmarkItem } from './types';
+import { APP_VERSION } from './version';
 import './style.css';
 
 // ========================================================
@@ -1312,6 +1313,9 @@ function initDatasetSelect(): void {
 }
 
 // 初期化実行
+const elAppVersion = document.getElementById('app-version');
+if (elAppVersion) elAppVersion.textContent = APP_VERSION;
+initDatasetSelect();
 initDatasetSelect();
 updateBookmarkUI();
 pickNextQuestion();
