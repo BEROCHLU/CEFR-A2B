@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEFR A2-B 英作文</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-top">
+        <h1>⚡ CEFR A2-B 英作文</h1>
+        <div class="header-actions">
+          <select id="dataset-select" class="dataset-select" aria-label="問題セット切替" title="問題セットを切り替え"></select>
+          <div class="badge badge-bookmark" id="bookmark-badge" role="button" tabindex="0" title="クリックして保存したQ&A一覧を表示">
+            <svg class="bookmark-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span id="bookmark-count-text">0件</span>
+          </div>
+          <div class="badge" id="progress-badge" role="button" tabindex="0" title="クリックして進捗一覧を表示">進捗: 0 / 152問</div>
+        </div>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </header>
+
+    <!-- Main Card -->
+    <main class="card">
+      <div class="category-tag" id="category-tag">準備中...</div>
+
+      <div class="question-text" id="question-text">
+        出題文を読み込んでいます...
+      </div>
+
+      <div class="input-group">
+        <textarea
+          id="user-input"
+          placeholder="英語を入力してください..."
+          autofocus
+        ></textarea>
+        
+        <div class="btn-row">
+          <button id="btn-submit" class="btn-primary">
+            <span>判定する (Enter)</span>
+          </button>
+
+          <button id="btn-next" class="btn-next hidden">
+            <span>次の問題へ ➔</span>
+          </button>
+          <button id="btn-mic" class="btn-mic" type="button" title="音声入力 (英語)" aria-label="音声入力 (英語)">
+            <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+              <line x1="12" y1="18" x2="12" y2="22"/>
+            </svg>
+          </button>
+          
+          <button id="btn-repeat" class="btn-secondary hidden" title="この問題でもう一度反復練習します">
+            <span>↺ もう一度</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Feedback Area -->
+      <div id="result-box" class="result-box hidden">
+        <div class="ai-info" id="ai-info" tabindex="0" aria-label="AIモデル情報">
+          <span class="ai-info-icon">i</span>
+          <div class="ai-info-tooltip" id="ai-info-tooltip"></div>
+        </div>
+        <div class="status-badge" id="status-badge"></div>
+        <div class="feedback-text" id="feedback-text"></div>
+        
+        <div class="answers-block hidden" id="answers-block">
+          <div class="answer-item">
+            <span class="answer-label">【模範解答】</span>
+            <span class="answer-val" id="model-answer"></span>
+          </div>
+          <div class="answer-item hidden" id="alt-answer-item">
+            <span class="answer-label">【別解】</span>
+            <span class="answer-val" id="alt-answer"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q&A with AI Coach -->
+      <div class="qa-section">
+        <button id="qa-toggle" class="qa-toggle">
+          💬 この問題についてAIに質問する
+        </button>
+        <div id="qa-container" class="qa-container hidden">
+          <!-- 質問と回答のスレッド一覧 -->
+          <div id="qa-thread" class="qa-thread"></div>
+
+          <!-- 質問入力フォーム -->
+          <div class="qa-input-row">
+            <input
+              type="text"
+              id="qa-input"
+              class="qa-input"
+              placeholder="質問を入力... (Enterで送信。続けて何回でも質問可能)"
+            />
+            <button id="btn-qa-ask" class="btn-secondary">送信</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Progress Modal -->
+  <div id="progress-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <div>
+          <h2 id="modal-title" class="modal-title">📊 学習進捗一覧</h2>
+          <div id="modal-summary" class="modal-summary">0 / 152問 クリア (0%)</div>
+        </div>
+        <button id="btn-modal-close" class="modal-close" aria-label="閉じる">✕</button>
+      </div>
+
+      <div class="modal-filters">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="uncompleted">未クリア</button>
+        <button class="filter-btn" data-filter="completed">クリア済み</button>
+      </div>
+
+      <div id="modal-body" class="modal-body"></div>
+
+      <div class="modal-footer">
+        <span class="modal-hint">💡 問題をクリックするとその問題へジャンプします</span>
+        <button id="btn-reset-progress" class="btn-danger-outline">進捗リセット</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookmark Modal -->
+  <div id="bookmark-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="bookmark-modal-title">
+      <div class="modal-header">
+        <div>
+          <h2 id="bookmark-modal-title" class="modal-title">
+            <svg class="bookmark-icon-title" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span>保存したQ&A一覧</span>
+          </h2>
+          <div id="bookmark-modal-summary" class="modal-summary">0件のブックマーク</div>
+        </div>
+        <button id="btn-bookmark-modal-close" class="modal-close" aria-label="閉じる">✕</button>
+      </div>
+
+      <div id="bookmark-modal-body" class="modal-body"></div>
+
+      <div class="modal-footer">
+        <span class="modal-hint">💡 気になった解説や疑問点をいつでも復習できます</span>
+        <button id="btn-clear-bookmarks" class="btn-danger-outline">すべて削除</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

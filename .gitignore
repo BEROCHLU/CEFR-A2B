@@ -1,0 +1,24 @@
+# API Keys & Secrets
+config.php
+public/config.php
+app/config.php
+LLM/
+
+# Temporary scratch files
+scratch*
+*.tmp
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS generated
+Thumbs.db
+.DS_Store
+
+AGENTS.md
+# Node & Vite
+node_modules/
+dist/
+.vite/
