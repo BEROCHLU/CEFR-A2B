@@ -11,7 +11,7 @@ $reasoningEffort = 'medium';
 
 return [
     // OpenAI API キー (環境変数 OPENAI_API_KEY またはここへ直接記述)
-    'api_key' => getenv('OPENAI_API_KEY') ?: 'YOUR_OPENAI_API_KEY_HERE',
+    'api_key' => getenv('OPENAI_API_KEY') ?: 'YOUR_OPENAI_API_KEY',
 
     'model' => $model,
 
