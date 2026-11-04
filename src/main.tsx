@@ -3,6 +3,7 @@ import { marked } from 'marked';
 import { phrases as u3StandardPhrases } from './data/phrases-u3';
 import { phrases as u3ExtraPhrases } from './data/phrases-u3-extra';
 import { phrases as u2Phrases } from './data/phrases-u2';
+import { phrases as u2ExtraPhrases } from './data/phrases-u2-extra';
 import type { DatasetConfigItem, FlattenedQuestion, BookmarkItem } from './types';
 import { APP_VERSION } from './version';
 import './style.css';
@@ -25,9 +26,15 @@ const DATASET_CONFIG: Record<string, DatasetConfigItem> = {
   },
   u2: {
     id: 'u2',
-    name: '基礎 (150問)',
+    name: '基礎 (240問)',
     shortName: '基礎',
     data: u2Phrases
+  },
+  u2Extra: {
+    id: 'u2Extra',
+    name: '基礎・追加 (100問)',
+    shortName: '基礎・追加',
+    data: u2ExtraPhrases
   }
 };
 
