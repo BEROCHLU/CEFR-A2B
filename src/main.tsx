@@ -217,6 +217,7 @@ const elInputGroup = document.querySelector('.input-group') as HTMLElement;
 const elUserInput = document.getElementById('user-input') as HTMLTextAreaElement;
 const elBtnMic = document.getElementById('btn-mic') as HTMLButtonElement | null;
 const elBtnSubmit = document.getElementById('btn-submit') as HTMLButtonElement;
+const elBtnSkip = document.getElementById('btn-skip') as HTMLButtonElement;
 const elBtnRepeat = document.getElementById('btn-repeat') as HTMLButtonElement;
 const elBtnNext = document.getElementById('btn-next') as HTMLButtonElement;
 
@@ -444,6 +445,8 @@ function setQuestion(q: FlattenedQuestion): void {
   elBtnSubmit.innerHTML = '<span>判定する (Enter)</span>';
 
   elBtnRepeat.classList.add('hidden');
+  elBtnSkip.classList.remove('hidden');
+  elBtnSkip.disabled = false;
 
   elBtnNext.classList.add('hidden');
   elBtnNext.disabled = true;
@@ -604,6 +607,7 @@ function showAllCompleted(): void {
   elUserInput.disabled = true;
   elInputGroup.classList.add('hidden');
   elBtnSubmit.classList.add('hidden');
+  elBtnSkip.classList.add('hidden');
   elBtnRepeat.classList.add('hidden');
   elBtnNext.classList.add('hidden');
 
@@ -828,6 +832,7 @@ async function evaluateAnswer(): Promise<void> {
 
   state.isEvaluating = true;
   elBtnSubmit.disabled = true;
+  elBtnSkip.disabled = true;
   elBtnSubmit.innerHTML = '<span class="spinner"></span> <span>添削中...</span>';
 
   try {
@@ -856,6 +861,7 @@ async function evaluateAnswer(): Promise<void> {
     console.error(err);
     alert(`エラーが発生しました: ${err.message}`);
     elBtnSubmit.disabled = false;
+    elBtnSkip.disabled = false;
     elBtnSubmit.innerHTML = '<span>判定する (Enter)</span>';
   } finally {
     if (isCurrent()) {
@@ -924,6 +930,7 @@ function handleEvaluationResult(data: any): void {
     elAnswersBlock.classList.remove('hidden');
 
     elBtnSubmit.classList.add('hidden');
+    elBtnSkip.classList.add('hidden');
     elBtnRepeat.classList.remove('hidden');
     elBtnRepeat.disabled = false;
     elBtnNext.classList.remove('hidden');
@@ -939,6 +946,8 @@ function handleEvaluationResult(data: any): void {
     elAnswersBlock.classList.add('hidden');
     elBtnNext.classList.add('hidden');
     elBtnRepeat.classList.add('hidden');
+    elBtnSkip.classList.remove('hidden');
+    elBtnSkip.disabled = false;
 
     elBtnSubmit.disabled = false;
     elBtnSubmit.innerHTML = '<span>もう一度判定する (Enter)</span>';
@@ -1149,6 +1158,21 @@ elBtnSubmit.addEventListener('click', evaluateAnswer);
 // 次の問題へボタン
 elBtnNext.addEventListener('click', () => {
   pickNextQuestion();
+});
+
+// パスボタン（クリア済みにして次の問題へ）
+elBtnSkip.addEventListener('click', () => {
+  if (!state.isEvaluating && !state.isPassed && state.currentQuestion) {
+    state.markPassed(state.currentQuestion.id);
+    state.previousQuestion = { ...state.currentQuestion };
+    if (state.clusterRemaining > 0) {
+      state.clusterRemaining--;
+    }
+    if (!elProgressModal.classList.contains('hidden')) {
+      renderProgressModal();
+    }
+    pickNextQuestion();
+  }
 });
 
 // 「もう一度」ボタン
