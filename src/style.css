@@ -333,6 +333,17 @@ button:active {
   background-color: #475569;
 }
 
+#btn-skip {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .btn-clear {
   background-color: #1e293b;
   border: 1px solid var(--card-border);

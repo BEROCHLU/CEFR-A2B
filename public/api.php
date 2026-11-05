@@ -42,8 +42,17 @@ if (!file_exists($configFile)) {
 $config = require $configFile;
 $apiKey = $config['api_key'] ?? '';
 $model = $config['model'] ?? 'gpt-6.1-terra';
-$reasoningEffort = $config['reasoning_effort'] ?? ($config['thinking_level'] ?? 'medium');
+$reasoningEffort = $config['reasoning_effort'] ?? null;
 $timeout = $config['timeout'] ?? 25;
+
+$allowedReasoningEfforts = ['low', 'medium', 'high', 'xhigh'];
+if (!in_array($reasoningEffort, $allowedReasoningEfforts, true)) {
+    http_response_code(500);
+    echo json_encode([
+        'error' => '推論レベルの設定が不正です。low | medium | high | xhigh のいずれかを指定してください。'
+    ]);
+    exit;
+}
 
 if (empty($apiKey)) {
     http_response_code(400);
@@ -125,10 +134,6 @@ if ($action === 'evaluate') {
             'effort' => $reasoningEffort
         ]
     ];
-
-    if ($reasoningEffort === 'none') {
-        $payload['temperature'] = 0.2;
-    }
 
     $response = callOpenAiResponsesApi($apiKey, $payload, $timeout);
     $text = extractResponseText($response);
@@ -227,10 +232,6 @@ if ($action === 'ask') {
         $userPrompt = "【現在のユーザーが書いた英文】\n{$english}{$evalContext}\n\n【質問】\n{$question}";
         $payload['instructions'] = $systemInstruction;
         $payload['input'] = $userPrompt;
-    }
-
-    if ($reasoningEffort === 'none') {
-        $payload['temperature'] = 0.4;
     }
 
     $response = callOpenAiResponsesApi($apiKey, $payload, $timeout);

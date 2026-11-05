@@ -8,7 +8,7 @@
 $model = 'gpt-6.1-terra';
 
 // 推論レベル low | medium | high | xhigh
-$reasoningEffort = 'medium';
+$reasoningEffort = 'low';
 
 $apiKey = getenv('OPENAI_API_KEY');
 if ($apiKey === false || $apiKey === '') {

@@ -10,8 +10,9 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 
 ## Key Features
 
-- **Curated Grammar Datasets (369 Prompts Total)**
-  - **基礎 / Basic**: 150 foundational prompts organized by grammatical structure.
+- **Curated Grammar Datasets (559 Prompts Total)**
+  - **基礎 / Basic**: 240 foundational prompts organized by grammatical structure.
+  - **基礎・追加 / Basic Extra**: 100 supplementary foundational prompts for additional practice.
   - **標準 / Standard**: 152 core prompts covering intermediate clause structures, participles, relatives, and subjunctive mood.
   - **標準・追加 / Standard Extra**: 67 supplementary prompts for extended practice.
 - **Category-Clustered Scheduling**
@@ -20,7 +21,7 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
   - Uses OpenAI Structured Outputs (`json_schema`) to classify answers into `pass`, `close`, or `fail`.
   - Accepts natural, idiomatic, and conversational English equivalents beyond rigid textbook answers.
   - **Strict Spoiler Prevention**: When an answer is `close` or `fail`, both the system prompt and backend enforce hiding the model answer and full translations—providing concise grammatical hints so learners can self-correct.
-  - Displays the reference answer, a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing, with instant **Repeat (`↺ もう一度`)** support.
+  - Displays the reference answer, a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing, with instant **Repeat (`↺ もう一度`)** and one-click **Pass (`パス`)** (mark as completed & advance) controls.
 - **Stateful Multi-Turn AI Coach Q&A & Bookmarks**
   - Ask follow-up questions about nuances, word choices, or custom sentences directly within each prompt.
   - Maintains multi-turn conversation and reasoning context via OpenAI's `previous_response_id` and automatic context compaction, rendered cleanly in Markdown.
@@ -64,7 +65,8 @@ cefr-a2b/
 │   ├── components/
 │   │   └── SpeechPractice.tsx     # Optional standalone React speech practice component
 │   ├── data/
-│   │   ├── phrases-u2.ts          # Basic dataset (150 items)
+│   │   ├── phrases-u2.ts          # Basic dataset (240 items)
+│   │   ├── phrases-u2-extra.ts    # Basic Extra dataset (100 items)
 │   │   ├── phrases-u3.ts          # Standard dataset (152 items)
 │   │   └── phrases-u3-extra.ts    # Standard Extra dataset (67 items)
 │   └── utils/
