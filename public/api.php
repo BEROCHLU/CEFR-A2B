@@ -43,10 +43,16 @@ $config = require $configFile;
 $apiKey = $config['api_key'] ?? '';
 $model = $config['model'] ?? 'gpt-6.1-terra';
 $reasoningEffort = $config['reasoning_effort'] ?? null;
+$askReasoningEffort = array_key_exists('ask_reasoning_effort', $config)
+    ? $config['ask_reasoning_effort']
+    : $reasoningEffort;
 $timeout = $config['timeout'] ?? 25;
 
 $allowedReasoningEfforts = ['low', 'medium', 'high', 'xhigh'];
-if (!in_array($reasoningEffort, $allowedReasoningEfforts, true)) {
+if (
+    !in_array($reasoningEffort, $allowedReasoningEfforts, true)
+    || !in_array($askReasoningEffort, $allowedReasoningEfforts, true)
+) {
     http_response_code(500);
     echo json_encode([
         'error' => '推論レベルの設定が不正です。low | medium | high | xhigh のいずれかを指定してください。'
@@ -219,7 +225,7 @@ if ($action === 'ask') {
             ]
         ],
         'reasoning' => [
-            'effort' => $reasoningEffort
+            'effort' => $askReasoningEffort
         ]
     ];
 
@@ -244,7 +250,7 @@ if ($action === 'ask') {
         'answer' => $answerText,
         'response_id' => $response['id'] ?? null,
         'model' => $model,
-        'thinking_level' => $reasoningEffort
+        'thinking_level' => $askReasoningEffort
     ]);
     exit;
 }
