@@ -41,5 +41,4 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
-            **/config.php
             **/.htaccess
