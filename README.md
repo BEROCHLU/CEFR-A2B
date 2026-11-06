@@ -16,7 +16,7 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
   - **標準 / Standard**: 152 core prompts covering intermediate clause structures, participles, relatives, and subjunctive mood.
   - **標準・追加 / Standard Extra**: 67 supplementary prompts for extended practice.
 - **Category-Clustered Scheduling**
-  - Automatically groups 3–4 uncompleted prompts from the same grammatical category in a row to reinforce structural patterns before switching to a new random category.
+  - Automatically groups 4 uncompleted prompts from the same grammatical category in a row to reinforce structural patterns before switching to a new random category.
 - **Flexible, Spoiler-Free AI Evaluation**
   - Uses OpenAI Structured Outputs (`json_schema`) to classify answers into `pass`, `close`, or `fail`.
   - Accepts natural, idiomatic, and conversational English equivalents beyond rigid textbook answers.

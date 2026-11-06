@@ -357,7 +357,7 @@ function isCurrentQuestionRequest(version: number, controller: AbortController, 
 }
 
 // ========================================================
-// 出題アルゴリズム (同系構文 3〜4問集中 ➔ ランダム切替)
+// 出題アルゴリズム (同系構文 4問集中 ➔ ランダム切替)
 // ========================================================
 function pickNextQuestion(): void {
   const currentQuestions = state.getCurrentQuestionsData();
@@ -404,7 +404,7 @@ function pickNextQuestion(): void {
 
     state.clusterCategory = categoryObj.category;
     const uncompletedInCat = categoryObj.items.filter(item => !state.completedIds.has(item.id));
-    state.clusterRemaining = Math.min(uncompletedInCat.length, Math.floor(Math.random() * 2) + 3); // 3 または 4問
+    state.clusterRemaining = Math.min(uncompletedInCat.length, 4); // 4問固定
   }
 
   // 3. 選択されたカテゴリから未完了の問題を1つランダム選択
@@ -555,7 +555,7 @@ function renderProgressModal(): void {
       itemEl.addEventListener('click', () => {
         state.clusterCategory = catObj.category;
         const uncompletedInCat = catObj.items.filter(i => !state.completedIds.has(i.id) && i.id !== item.id);
-        state.clusterRemaining = Math.min(uncompletedInCat.length + 1, Math.floor(Math.random() * 2) + 3);
+        state.clusterRemaining = Math.min(uncompletedInCat.length + 1, 4);
         setQuestion({
           id: item.id,
           text: item.text,
@@ -786,7 +786,7 @@ function renderBookmarkModal(): void {
       if (targetItem && targetCat) {
         state.clusterCategory = targetCat.category;
         const uncompletedInCat = targetCat.items.filter(i => !state.completedIds.has(i.id) && i.id !== targetItem.id);
-        state.clusterRemaining = Math.min(uncompletedInCat.length + 1, Math.floor(Math.random() * 2) + 3);
+        state.clusterRemaining = Math.min(uncompletedInCat.length + 1, 4);
         setQuestion({
           id: targetItem.id,
           text: targetItem.text,
