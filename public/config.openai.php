@@ -24,5 +24,5 @@ return [
     'model' => $model,
     'reasoning_effort' => $reasoningEffort,
     'ask_reasoning_effort' => $askReasoningEffort,
-    'timeout' => 25,
+    'timeout' => 30,
 ];
