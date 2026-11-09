@@ -223,7 +223,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 33,
         "text": "彼女はその部屋で静かにしていなければなりませんか？はい、そうです。",
-        "answer": "Does she have to stay calm in the room? Yes, she does."
+        "answer": "Does she have to be quiet in the room? Yes, she does."
       },
       {
         "id": 34,
@@ -663,7 +663,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 99,
         "text": "その星は日本で見られますか？",
-        "answer": "Is the star seen in Japan?"
+        "answer": "Can the star be seen in Japan?"
       },
       {
         "id": 100,

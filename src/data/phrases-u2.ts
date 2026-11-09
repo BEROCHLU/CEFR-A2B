@@ -342,7 +342,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 60,
-        "text": "紅茶をもうすこし飲みますか？はい、お願いします。",
+        "text": "紅茶をもう少し飲みませんか？はい、お願いします。",
         "answer": "Will you have some more tea? Yes, please."
       },
       {
@@ -373,7 +373,7 @@ export const phrases: CategoryGroup[] = [
     ]
   },
   {
-    "category": "be going to",
+    "category": "be going to / will",
     "items": [
       {
         "id": 66,
@@ -413,7 +413,7 @@ export const phrases: CategoryGroup[] = [
     ]
   },
   {
-    "category": "must / may",
+    "category": "must / may / have to",
     "items": [
       {
         "id": 73,
@@ -467,7 +467,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 82,
-        "text": "彼女は皿を洗わないでもよかった。",
+        "text": "彼女は皿を洗わなくてもよかった。",
         "answer": "She didn't have to wash the dishes."
       },
       {
@@ -487,7 +487,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 86,
-        "text": "彼女は一人でそこに行かないですんだ。",
+        "text": "彼女は一人でそこに行かなくてもよかった。",
         "answer": "She didn't have to go there alone."
       }
     ]

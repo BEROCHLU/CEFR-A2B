@@ -587,7 +587,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 103,
-        "text": "あの外国人が話している言葉はドイツ語ですか?",
+        "text": "あの外国人はドイツ語を話していますか？",
         "answer": "Is that foreigner speaking German?"
       }
     ]
