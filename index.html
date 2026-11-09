@@ -101,18 +101,17 @@
           </button>
           <span class="app-version" id="app-version"></span>
         </div>
-        <div id="qa-container" class="qa-container hidden">
+        <div id="qa-container" class="qa-container">
           <!-- 質問と回答のスレッド一覧 -->
           <div id="qa-thread" class="qa-thread"></div>
 
           <!-- 質問入力フォーム -->
           <div class="qa-input-row">
-            <input
-              type="text"
+            <textarea
               id="qa-input"
               class="qa-input"
               placeholder="質問を入力... (Enterで送信。続けて何回でも質問可能)"
-            />
+            ></textarea>
             <button id="btn-qa-ask" class="btn-secondary">送信</button>
           </div>
         </div>

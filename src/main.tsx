@@ -233,7 +233,7 @@ const elAltAnswer = document.getElementById('alt-answer') as HTMLElement;
 const elQaSection = document.querySelector('.qa-section') as HTMLElement;
 const elQaToggle = document.getElementById('qa-toggle') as HTMLButtonElement;
 const elQaContainer = document.getElementById('qa-container') as HTMLElement;
-const elQaInput = document.getElementById('qa-input') as HTMLInputElement;
+const elQaInput = document.getElementById('qa-input') as HTMLTextAreaElement;
 const elBtnQaAsk = document.getElementById('btn-qa-ask') as HTMLButtonElement;
 const elQaThread = document.getElementById('qa-thread') as HTMLElement;
 
@@ -434,6 +434,7 @@ function setQuestion(q: FlattenedQuestion): void {
   elCategoryTag.textContent = `【No.${q.id}】`;
   elInputGroup.classList.remove('hidden');
   elQaSection.classList.remove('hidden');
+  elQaContainer.classList.remove('hidden');
   elQuestionText.textContent = q.text;
   elUserInput.value = '';
   elUserInput.disabled = false;
@@ -1194,18 +1195,15 @@ elUserInput.addEventListener('keydown', (e) => {
   }
 });
 
-// Q&A トグル
+// Q&A 見出しクリックで入力欄にフォーカス
 elQaToggle.addEventListener('click', () => {
-  elQaContainer.classList.toggle('hidden');
-  if (!elQaContainer.classList.contains('hidden')) {
-    elQaInput.focus();
-  }
+  elQaInput.focus();
 });
 
 // Q&A 送信ボタン
 elBtnQaAsk.addEventListener('click', askQuestion);
 elQaInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
+  if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
     askQuestion();
   }
