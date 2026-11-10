@@ -13,15 +13,15 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 - **Curated Grammar Datasets (559 Prompts Total)**
   - **基礎 / Basic**: 240 foundational prompts organized by grammatical structure.
   - **基礎・追加 / Basic Extra**: 100 supplementary foundational prompts for additional practice.
-  - **標準 / Standard**: 152 core prompts covering intermediate clause structures, participles, relatives, and subjunctive mood.
+  - **標準 / Standard**: 152 core prompts covering relative pronouns/adverbs, participles, causative/perception verbs, infinitive constructions, and indirect questions.
   - **標準・追加 / Standard Extra**: 67 supplementary prompts for extended practice.
 - **Category-Clustered Scheduling**
-  - Automatically groups 4 uncompleted prompts from the same grammatical category in a row to reinforce structural patterns before switching to a new random category.
+  - Automatically groups up to 4 uncompleted prompts from the same grammatical category in a row to reinforce structural patterns before switching to a new random category.
 - **Flexible, Spoiler-Free AI Evaluation**
   - Uses OpenAI Structured Outputs (`json_schema`) to classify answers into `pass`, `close`, or `fail`.
   - Accepts natural, idiomatic, and conversational English equivalents beyond rigid textbook answers.
   - **Strict Spoiler Prevention**: When an answer is `close` or `fail`, both the system prompt and backend enforce hiding the model answer and full translations—providing concise grammatical hints so learners can self-correct.
-  - Displays the reference answer, a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing, with instant **Repeat (`↺ もう一度`)** and one-click **Pass (`パス`)** (mark as completed & advance) controls.
+  - Displays the reference answer, a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing with an instant **Repeat (`↺ もう一度`)** button, plus a one-click **Pass (`パス`)** button while answering to mark already-mastered prompts as completed and advance.
 - **Stateful Multi-Turn AI Coach Q&A & Bookmarks**
   - Ask follow-up questions about nuances, word choices, or custom sentences directly within each prompt.
   - Maintains multi-turn conversation and reasoning context via OpenAI's `previous_response_id` and automatic context compaction, rendered cleanly in Markdown.
@@ -96,7 +96,7 @@ npm install
 
 ### 2. Set your OpenAI API key
 
-Set the `OPENAI_API_KEY` environment variable in your OS or shell before starting the dev server (`public/config.openai.php` reads it automatically; model and reasoning settings can also be adjusted there):
+Set the `OPENAI_API_KEY` environment variable in your OS or shell before starting the dev server (`public/config.openai.php` reads it automatically; model and separate reasoning effort levels for evaluation and Q&A—`low | medium | high | xhigh`—can also be adjusted there):
 
 ```bash
 # macOS / Linux
@@ -143,7 +143,7 @@ Vite compiles TypeScript and bundles static assets—alongside `public/api.php` 
        ├── config.openai.php
        └── assets/
    ```
-   *(If `prompt/` resides inside `public_html/`, block direct HTTP access to `.md` files via `.htaccess`, e.g., `<FilesMatch "\.md$"> Require all denied </FilesMatch>`. Automated FTPS deployment is also configured in `.github/workflows/deploy.yml`.)*
+   *(If `prompt/` resides inside `public_html/`, block direct HTTP access to `.md` files and `config.openai.php` via `.htaccess`, e.g., `<FilesMatch "\.md$"> Require all denied </FilesMatch>` and `<Files "config.openai.php"> Require all denied </Files>`. Automated FTPS deployment is also configured in `.github/workflows/deploy.yml`.)*
 2. Provide the `OPENAI_API_KEY` environment variable on the server (e.g., `SetEnv OPENAI_API_KEY "..."` in `.htaccess`).
 
 ---
@@ -160,6 +160,12 @@ Vite compiles TypeScript and bundles static assets—alongside `public/api.php` 
 
 ---
 
+## Demo
+
+- https://ss1.xrea.com/pleasecov.g2.xrea.com/cefr-a2b/dist/
+
+---
+
 ## License
 
-Released under the [MIT License](./LICENSE).
+Released under the [CC BY-NC 4.0 (Creative Commons Attribution-NonCommercial 4.0 International)](./LICENSE) license. Commercial use is strictly prohibited.
