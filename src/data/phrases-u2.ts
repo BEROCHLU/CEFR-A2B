@@ -289,6 +289,11 @@ export const phrases: CategoryGroup[] = [
         "id": 51,
         "text": "彼女はいい先生になるでしょう。",
         "answer": "She will be a good teacher."
+      },
+      {
+        "id": 52,
+        "text": "彼の飛行機は何時にパリに着くのですか？",
+        "answer": "What time will his flight arrive in Paris?"
       }
     ]
   },
@@ -296,90 +301,85 @@ export const phrases: CategoryGroup[] = [
     "category": "will (意志未来)",
     "items": [
       {
-        "id": 52,
+        "id": 53,
         "text": "僕が君の宿題を手伝ってあげるよ。",
         "answer": "I will help you with your homework."
       },
       {
-        "id": 53,
+        "id": 54,
         "text": "私はそんな本は読みません。",
         "answer": "I won't read such a book."
       },
       {
-        "id": 54,
+        "id": 55,
         "text": "あなたのことは絶対に忘れません。",
         "answer": "I will never forget you."
       },
       {
-        "id": 55,
+        "id": 56,
         "text": "一週間したら戻ってくるからね。",
         "answer": "I will be back in a week."
       },
       {
-        "id": 56,
+        "id": 57,
         "text": "私はあなたにもう会いません。",
         "answer": "I won't see you again."
       },
       {
-        "id": 57,
+        "id": 58,
         "text": "今日宿題を終わらせるぞ。",
         "answer": "I will finish my homework today."
       },
       {
-        "id": 58,
+        "id": 59,
         "text": "僕はいつかアメリカに行くぞ。",
         "answer": "I will go to America some day."
       }
     ]
   },
   {
-    "category": "will (依頼) / shall (申し出・誘い)",
+    "category": "will / would (依頼・勧誘) / shall (申し出・誘い)",
     "items": [
       {
-        "id": 59,
+        "id": 60,
         "text": "僕に自転車を貸してくれない？ごめんね、でも貸せないんだ。",
         "answer": "Will you please lend me your bicycle? I'm sorry but I can't."
       },
       {
-        "id": 60,
-        "text": "紅茶をもう少し飲みませんか？はい、お願いします。",
-        "answer": "Will you have some more tea? Yes, please."
+        "id": 61,
+        "text": "もう少し紅茶はいかがですか？はい、お願いします。",
+        "answer": "Would you like some more tea? Yes, please."
       },
       {
-        "id": 61,
+        "id": 62,
         "text": "あなたに椅子を持って来ましょうか？はい、お願いします。",
         "answer": "Shall I bring you a chair? Yes, please."
       },
       {
-        "id": 62,
+        "id": 63,
         "text": "彼らと野球をしようか？うん、しよう。",
         "answer": "Shall we play baseball with them? Yes, let's."
       },
       {
-        "id": 63,
+        "id": 64,
         "text": "公園でサッカーをしようか？いや、やめとこう。",
         "answer": "Shall we play soccer in the park? No, let's not."
       },
       {
-        "id": 64,
+        "id": 65,
         "text": "窓を閉めてくれませんか？いいですよ。",
         "answer": "Will you please close the window? All right."
       },
       {
-        "id": 65,
+        "id": 66,
         "text": "あなたに夕食を作ってあげましょうか？いいえ、結構です。",
         "answer": "Shall I cook dinner for you? No, thank you."
       }
     ]
   },
   {
-    "category": "be going to / will",
+    "category": "be going to",
     "items": [
-      {
-        "id": 66,
-        "text": "彼の飛行機は何時にパリに着くのですか？",
-        "answer": "What time will his flight arrive in Paris?"
-      },
       {
         "id": 67,
         "text": "誰が彼女を駅前で(車で)拾うのですか？",
@@ -413,40 +413,35 @@ export const phrases: CategoryGroup[] = [
     ]
   },
   {
-    "category": "must / may / have to",
+    "category": "must / may",
     "items": [
       {
         "id": 73,
-        "text": "僕は今晩家にいなければなりませんか？",
-        "answer": "Do I have to stay home tonight?"
-      },
-      {
-        "id": 74,
         "text": "子供はそこに一人で行ってはなりません。",
         "answer": "A child must not go there alone."
       },
       {
-        "id": 75,
+        "id": 74,
         "text": "あなたはお年寄りたちに親切にしなければなりません。",
         "answer": "You must be kind to the elderly."
       },
       {
-        "id": 76,
+        "id": 75,
         "text": "このアルバムを見てもいいですか？いいえ、いけません。",
         "answer": "May I look at this album? No, you can't."
       },
       {
-        "id": 77,
+        "id": 76,
         "text": "弟とあなたの家に行ってもいいですか？はい、いいですよ。",
         "answer": "May I go to your house with my brother? Yes, you can."
       },
       {
-        "id": 78,
+        "id": 77,
         "text": "一日中テレビを見てはいけません。",
         "answer": "You mustn't watch TV all day."
       },
       {
-        "id": 79,
+        "id": 78,
         "text": "あの人と話してもいいですか？いいえ、いけません。",
         "answer": "May I talk to that person? No, you may not."
       }
@@ -455,6 +450,11 @@ export const phrases: CategoryGroup[] = [
   {
     "category": "have to",
     "items": [
+      {
+        "id": 79,
+        "text": "僕は今晩家にいなければなりませんか？",
+        "answer": "Do I have to stay home tonight?"
+      },
       {
         "id": 80,
         "text": "僕たちはこれらの本を読まなくてはいけませんか？はい、そうです。",
@@ -582,31 +582,26 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 102,
-        "text": "彼女の趣味は花を育てることです。",
-        "answer": "Her hobby is growing flowers."
-      },
-      {
-        "id": 103,
         "text": "英語を話すのは簡単ではありません。",
         "answer": "It is not easy to speak English."
       },
       {
-        "id": 104,
+        "id": 103,
         "text": "あなたといるのはとても楽しいです。",
         "answer": "It is a lot of fun to be with you."
       },
       {
-        "id": 105,
+        "id": 104,
         "text": "あなたは何をしたいですか？",
         "answer": "What do you want to do?"
       },
       {
-        "id": 106,
+        "id": 105,
         "text": "彼の夢は世界中を旅行することでした。",
         "answer": "His dream was to travel around the world."
       },
       {
-        "id": 107,
+        "id": 106,
         "text": "僕の姉は去年イタリア語を勉強し始めた。",
         "answer": "My sister began to study Italian last year."
       }
@@ -616,37 +611,37 @@ export const phrases: CategoryGroup[] = [
     "category": "不定詞―副詞的用法 (目的)",
     "items": [
       {
-        "id": 108,
+        "id": 107,
         "text": "僕の兄は毎週日曜日サーフィンを楽しみに海に行く。",
         "answer": "My brother goes to the beach to enjoy surfing every Sunday."
       },
       {
-        "id": 109,
+        "id": 108,
         "text": "君はトムに会うためにここに来たのですか？",
         "answer": "Did you come here to see Tom?"
       },
       {
-        "id": 110,
+        "id": 109,
         "text": "僕の弟は新しい自転車を買うためにお金を貯めている。",
         "answer": "My brother is saving money to buy a new bicycle."
       },
       {
-        "id": 111,
+        "id": 110,
         "text": "彼らは試験に受かるために毎日何時間も勉強しなければならない。",
         "answer": "They have to study for many hours every day to pass the exam."
       },
       {
-        "id": 112,
+        "id": 111,
         "text": "僕は本を何冊か借りに図書館に行った。",
         "answer": "I went to the library to borrow some books."
       },
       {
-        "id": 113,
+        "id": 112,
         "text": "僕は宿題をするために明日の朝早く起きるつもりです。",
         "answer": "I am going to get up early tomorrow morning to do my homework."
       },
       {
-        "id": 114,
+        "id": 113,
         "text": "ロバートとナンシーは昨夜夕食をしにすてきなレストランに行った。",
         "answer": "Robert and Nancy went to a nice restaurant to have dinner last night."
       }
@@ -656,37 +651,37 @@ export const phrases: CategoryGroup[] = [
     "category": "不定詞―副詞的用法 (感情の原因)",
     "items": [
       {
-        "id": 115,
+        "id": 114,
         "text": "彼女はあなたに再び会って喜ぶでしょう。",
         "answer": "She will be glad to see you again."
       },
       {
-        "id": 116,
+        "id": 115,
         "text": "彼の話を聴いて私たちはとても驚いた。",
         "answer": "We were very surprised to hear his story."
       },
       {
-        "id": 117,
+        "id": 116,
         "text": "私はその悪い知らせを聴いて残念だった。",
         "answer": "I was sorry to hear the bad news."
       },
       {
-        "id": 118,
+        "id": 117,
         "text": "あなたは旧友に会えてうれしかったですか？",
         "answer": "Were you happy to see your old friend?"
       },
       {
-        "id": 119,
+        "id": 118,
         "text": "遅れてすみません(遅れて残念です)。",
         "answer": "I am sorry to be late."
       },
       {
-        "id": 120,
+        "id": 119,
         "text": "その大きな建物を見て彼らは驚きました。",
         "answer": "They were surprised to see the big building."
       },
       {
-        "id": 121,
+        "id": 120,
         "text": "彼にまた会えてうれしかった。",
         "answer": "I was happy to see him again."
       }
@@ -696,37 +691,37 @@ export const phrases: CategoryGroup[] = [
     "category": "不定詞―形容詞的用法",
     "items": [
       {
-        "id": 122,
+        "id": 121,
         "text": "彼女は彼に言いたいこと(言うための何か)があった。",
         "answer": "She had something to say to him."
       },
       {
-        "id": 123,
+        "id": 122,
         "text": "彼は明日あなたに会う時間はないでしょう。",
         "answer": "He won't have any time to see you tomorrow."
       },
       {
-        "id": 124,
+        "id": 123,
         "text": "僕は今日何もすることがない。",
         "answer": "I don't have anything to do today."
       },
       {
-        "id": 125,
+        "id": 124,
         "text": "彼には住む家がない。",
         "answer": "He doesn't have a house to live in."
       },
       {
-        "id": 126,
+        "id": 125,
         "text": "あなたは筆記用具(書くための何か)を持っていますか？",
         "answer": "Do you have anything to write with?"
       },
       {
-        "id": 127,
+        "id": 126,
         "text": "あなたは読む本を(何冊か)持っていますか？",
         "answer": "Do you have any books to read?"
       },
       {
-        "id": 128,
+        "id": 127,
         "text": "彼は何か食べるものが欲しかったのですか？",
         "answer": "Did he want something to eat?"
       }
@@ -735,6 +730,11 @@ export const phrases: CategoryGroup[] = [
   {
     "category": "動名詞",
     "items": [
+      {
+        "id": 128,
+        "text": "彼女の趣味は花を育てることです。",
+        "answer": "Her hobby is growing flowers."
+      },
       {
         "id": 129,
         "text": "あなたは煙草を吸うのをやめますか？",
@@ -1302,33 +1302,33 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 228,
-        "text": "この人形は木製ですか(木でできているのですか)？いいえ、違います。紙でできています。",
-        "answer": "Is this doll made of wood? No, it isn't. It is made of paper."
-      },
-      {
-        "id": 229,
-        "text": "チーズは牛乳で作られます。",
-        "answer": "Cheese is made from milk."
-      },
-      {
-        "id": 230,
         "text": "この本は誰に書かれたのですか？",
         "answer": "Who was this book written by?"
       },
       {
-        "id": 231,
+        "id": 229,
         "text": "この部屋は毎日使われますか？",
         "answer": "Is this room used every day?"
       },
       {
-        "id": 232,
+        "id": 230,
         "text": "英語は多くの国で話されます。",
         "answer": "English is spoken in many countries."
       },
       {
-        "id": 233,
+        "id": 231,
         "text": "この机は彼によって作られたのではありません。",
         "answer": "This desk was not made by him."
+      },
+      {
+        "id": 232,
+        "text": "その言葉はどこで話されますか？",
+        "answer": "Where is the language spoken?"
+      },
+      {
+        "id": 233,
+        "text": "あなたはどこで生まれたのですか？日本で生まれました。",
+        "answer": "Where were you born? I was born in Japan."
       }
     ]
   },
@@ -1337,38 +1337,38 @@ export const phrases: CategoryGroup[] = [
     "items": [
       {
         "id": 234,
+        "text": "この人形は木製ですか(木でできているのですか)？いいえ、違います。紙でできています。",
+        "answer": "Is this doll made of wood? No, it isn't. It is made of paper."
+      },
+      {
+        "id": 235,
+        "text": "チーズは牛乳で作られます。",
+        "answer": "Cheese is made from milk."
+      },
+      {
+        "id": 236,
         "text": "これは何でできているのですか？石でできています。",
         "answer": "What is this made of? It is made of stone."
       },
       {
-        "id": 235,
-        "text": "あなたはあの先生に叱られたことがありますか？(現在完了)",
-        "answer": "Have you ever been scolded by that teacher?"
+        "id": 237,
+        "text": "ワインは葡萄で作られます。",
+        "answer": "Wine is made from grapes."
       },
       {
-        "id": 236,
+        "id": 238,
         "text": "この話はみんなに知られています。",
         "answer": "This story is known to everyone."
       },
       {
-        "id": 237,
-        "text": "その言葉はどこで話されますか？",
-        "answer": "Where is the language spoken?"
-      },
-      {
-        "id": 238,
-        "text": "そのケーキはトムに食べられてしまいました。",
-        "answer": "The cake has been eaten by Tom."
-      },
-      {
         "id": 239,
-        "text": "あなたはどこで生まれたのですか？日本で生まれました。",
-        "answer": "Where were you born? I was born in Japan."
+        "text": "あなたはあの先生に叱られたことがありますか？(現在完了)",
+        "answer": "Have you ever been scolded by that teacher?"
       },
       {
         "id": 240,
-        "text": "ワインは葡萄で作られます。",
-        "answer": "Wine is made from grapes."
+        "text": "そのケーキはトムに食べられてしまいました。",
+        "answer": "The cake has been eaten by Tom."
       }
     ]
   }
