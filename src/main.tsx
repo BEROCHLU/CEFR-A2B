@@ -227,6 +227,7 @@ const elStatusBadge = document.getElementById('status-badge') as HTMLElement;
 const elFeedbackText = document.getElementById('feedback-text') as HTMLElement;
 const elAnswersBlock = document.getElementById('answers-block') as HTMLElement;
 const elModelAnswer = document.getElementById('model-answer') as HTMLElement;
+const elBtnSpeakModel = document.getElementById('btn-speak-model') as HTMLButtonElement | null;
 const elAltAnswerItem = document.getElementById('alt-answer-item') as HTMLElement;
 const elAltAnswer = document.getElementById('alt-answer') as HTMLElement;
 
@@ -282,6 +283,7 @@ function startSpeechRecognition(): void {
   }
 
   stopSpeechRecognition();
+  stopSpeechSynthesis();
 
   try {
     const recognition = new SpeechRecognitionClass();
@@ -340,8 +342,58 @@ if (elBtnMic) {
   }
 }
 
+function stopSpeechSynthesis(): void {
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  elBtnSpeakModel?.classList.remove('speaking');
+}
+
+function speakEnglishText(text: string): void {
+  const trimmed = text.trim();
+  if (!trimmed || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+
+  stopSpeechRecognition();
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(trimmed);
+  utterance.lang = 'en-US';
+
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice =
+    voices.find(v => v.lang === 'en-US' && /natural|google|samantha|daniel|alex|microsoft/i.test(v.name)) ||
+    voices.find(v => v.lang === 'en-US') ||
+    voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) {
+    utterance.voice = enVoice;
+  }
+
+  utterance.onstart = () => {
+    elBtnSpeakModel?.classList.add('speaking');
+  };
+  utterance.onend = () => {
+    elBtnSpeakModel?.classList.remove('speaking');
+  };
+  utterance.onerror = () => {
+    elBtnSpeakModel?.classList.remove('speaking');
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+if (elBtnSpeakModel) {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+    elBtnSpeakModel.style.display = 'none';
+  } else {
+    elBtnSpeakModel.addEventListener('click', () => {
+      speakEnglishText(elModelAnswer.textContent || '');
+    });
+  }
+}
+
 function invalidateQuestionRequests(): void {
   stopSpeechRecognition();
+  stopSpeechSynthesis();
   questionVersion++;
   evaluationController?.abort();
   qaController?.abort();

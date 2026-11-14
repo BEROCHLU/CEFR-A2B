@@ -1,6 +1,6 @@
 # CEFR A2-B English Composition
 
-An interactive Japanese-to-English composition trainer designed for mastering practical English grammar and phrasing at the CEFR A2–B levels. Powered by the **OpenAI Responses API**, it provides flexible semantic grading, spoiler-free hints for retries, natural alternative phrasings, voice input via the Web Speech API, and multi-turn AI coaching.
+An interactive Japanese-to-English composition trainer designed for mastering practical English grammar and phrasing at the CEFR A2–B levels. Powered by the **OpenAI Responses API**, it provides flexible semantic grading, spoiler-free hints for retries, natural alternative phrasings, voice input and audio playback via the Web Speech API, and multi-turn AI coaching.
 
 > **Note:** The application UI, source prompts, and coaching explanations are written in Japanese for Japanese speakers learning English.
 
@@ -21,13 +21,13 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
   - Uses OpenAI Structured Outputs (`json_schema`) to classify answers into `pass`, `close`, or `fail`.
   - Accepts natural, idiomatic, and conversational English equivalents beyond rigid textbook answers.
   - **Strict Spoiler Prevention**: When an answer is `close` or `fail`, both the system prompt and backend enforce hiding the model answer and full translations—providing concise grammatical hints so learners can self-correct.
-  - Displays the reference answer, a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing with an instant **Repeat (`↺ もう一度`)** button, plus a one-click **Pass (`パス`)** button while answering to mark already-mastered prompts as completed and advance.
+  - Displays the reference answer (with one-click audio pronunciation playback), a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing with an instant **Repeat (`↺ もう一度`)** button, plus a one-click **Pass (`パス`)** button while answering to mark already-mastered prompts as completed and advance.
 - **Stateful Multi-Turn AI Coach Q&A & Bookmarks**
   - Ask follow-up questions about nuances, word choices, or custom sentences directly within each prompt.
   - Maintains multi-turn conversation and reasoning context via OpenAI's `previous_response_id` and automatic context compaction, rendered cleanly in Markdown.
   - Bookmark helpful Q&A exchanges to review anytime or jump directly back to the associated question.
-- **English Voice Input**
-  - Built-in microphone support (`en-US`) powered by the browser's Web Speech API for speaking-based composition practice, plus an optional standalone `SpeechPractice` React component with Longest Common Subsequence (LCS) word-matching utilities.
+- **English Voice Input & TTS Playback**
+  - Built-in microphone support (`en-US`) and model-answer text-to-speech (`speechSynthesis`) powered by the browser's Web Speech API, plus an optional standalone `SpeechPractice` React component with Longest Common Subsequence (LCS) word-matching utilities.
 - **Zero-Signup Local Persistence**
   - Tracks per-dataset completion progress and saved Q&A bookmarks in `localStorage`, complete with a filterable progress modal (`All` / `Uncompleted` / `Completed`) and direct question jumping.
 

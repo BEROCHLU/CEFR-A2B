@@ -523,6 +523,38 @@ button:disabled {
   font-weight: 500;
 }
 
+.btn-speak {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin-left: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s, transform 0.15s;
+}
+
+.btn-speak:hover {
+  color: #34d399;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-speak.speaking {
+  color: #34d399;
+}
+
+.btn-speak svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
 /* Q&A Section */
 .qa-section {
   border-top: 1px solid var(--card-border);
