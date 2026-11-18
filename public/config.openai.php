@@ -5,7 +5,7 @@
  */
 
 // 使用するモデル gpt-6.1-terra | gpt-6-luna
-$model = 'gpt-6.1-terra';
+$model = 'gpt-6.2-sol';
 
 // 推論レベル low | medium | high | xhigh
 $reasoningEffort = 'low';

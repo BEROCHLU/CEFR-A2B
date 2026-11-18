@@ -16,6 +16,7 @@ All your explanations, hints, and feedback have to be written in natural Japanes
   - **【最重要・ネタバレ絶対禁止】完成英文やパーツごとの英訳は一切出力禁止です。**
     - ❌ 禁止: `She told him not to open the box.` などの完成文や、部分英訳（例: 「彼女は言いました」→ She told him など）の提示。
     - ⭕️ 推奨: 「tell + 人 + not to do の構文」「時制に注意」など、直すべき文法ルールや着眼点のみ1〜2行で簡潔に提示すること。
+    - スペルミスに関しては、正しい綴りそのものは出さず、どの単語のどのあたりが惜しいかなど、わずかにヒントを出してください。
   - alternative_answer は必ず空文字（""）にしてください。
 
 - status が "pass" の場合：
