@@ -349,6 +349,13 @@ function stopSpeechSynthesis(): void {
   elBtnSpeakModel?.classList.remove('speaking');
 }
 
+// iOS WebKit populates getVoices() lazily, causing the 1st and 2nd+ playbacks to use different voices;
+// keeping utterance.voice unset lets iOS consistently use its default en-US voice.
+const isIOS =
+  typeof navigator !== 'undefined' &&
+  (/iP(hone|ad|od)/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
 function speakEnglishText(text: string): void {
   const trimmed = text.trim();
   if (!trimmed || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -359,13 +366,15 @@ function speakEnglishText(text: string): void {
   const utterance = new SpeechSynthesisUtterance(trimmed);
   utterance.lang = 'en-US';
 
-  const voices = window.speechSynthesis.getVoices();
-  const enVoice =
-    voices.find(v => v.lang === 'en-US' && /natural|google|samantha|daniel|alex|microsoft/i.test(v.name)) ||
-    voices.find(v => v.lang === 'en-US') ||
-    voices.find(v => v.lang.startsWith('en'));
-  if (enVoice) {
-    utterance.voice = enVoice;
+  if (!isIOS) {
+    const voices = window.speechSynthesis.getVoices();
+    const enVoice =
+      voices.find(v => v.lang === 'en-US' && /natural|google|samantha|daniel|alex|microsoft/i.test(v.name)) ||
+      voices.find(v => v.lang === 'en-US') ||
+      voices.find(v => v.lang.startsWith('en'));
+    if (enVoice) {
+      utterance.voice = enVoice;
+    }
   }
 
   utterance.onstart = () => {
@@ -385,6 +394,9 @@ if (elBtnSpeakModel) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
     elBtnSpeakModel.style.display = 'none';
   } else {
+    if (!isIOS) {
+      window.speechSynthesis.getVoices();
+    }
     elBtnSpeakModel.addEventListener('click', () => {
       speakEnglishText(elModelAnswer.textContent || '');
     });

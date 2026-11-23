@@ -167,8 +167,8 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 25,
-        "text": "コーヒーを入れてくれるかい？いいよ。",
-        "answer": "Will you please make some coffee? Sure."
+        "text": "コーヒー淹れてくれる？いいよ。",
+        "answer": "Could you make some coffee? Sure."
       }
     ]
   },
@@ -337,13 +337,13 @@ export const phrases: CategoryGroup[] = [
     "items": [
       {
         "id": 50,
-        "text": "私には今日しなければならない(するべき)宿題があります。",
+        "text": "今日やる宿題がある。",
         "answer": "I have homework to do today."
       },
       {
         "id": 51,
         "text": "僕はあの店で弟にあげる物を何か買うつもりだ。",
-        "answer": "I am going to buy something to give to my brother at that store."
+        "answer": "I will buy something at that store to give my brother "
       },
       {
         "id": 52,
