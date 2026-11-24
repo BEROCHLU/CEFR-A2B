@@ -142,7 +142,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 21,
-        "text": "僕は英語とロシア語を身につけるぞ。",
+        "text": "英語とロシア語を学ぶつもりです。",
         "answer": "I will learn English and Russian."
       },
       {
