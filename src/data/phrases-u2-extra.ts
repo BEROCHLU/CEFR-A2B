@@ -517,7 +517,7 @@ export const phrases: CategoryGroup[] = [
     "items": [
       {
         "id": 77,
-        "text": "トムとロバートでは、昨夜どちらが遅く寝ましたか？",
+        "text": "昨夜、トムとロバートのうち、どちらが遅く寝床に入りましたか？",
         "answer": "Who went to bed later last night, Tom or Robert?"
       },
       {

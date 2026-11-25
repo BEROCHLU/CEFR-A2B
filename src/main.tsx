@@ -4,6 +4,7 @@ import { phrases as u3StandardPhrases } from './data/phrases-u3';
 import { phrases as u3ExtraPhrases } from './data/phrases-u3-extra';
 import { phrases as u2Phrases } from './data/phrases-u2';
 import { phrases as u2ExtraPhrases } from './data/phrases-u2-extra';
+import { phrases as m1Phrases } from './data/phrases-m1';
 import type { DatasetConfigItem, FlattenedQuestion, BookmarkItem } from './types';
 import { APP_VERSION } from './version';
 import './style.css';
@@ -35,6 +36,12 @@ const DATASET_CONFIG: Record<string, DatasetConfigItem> = {
     name: '基礎・追加 (100問)',
     shortName: '基礎・追加',
     data: u2ExtraPhrases
+  },
+  m1: {
+    id: 'm1',
+    name: '発展 (251問)',
+    shortName: '発展',
+    data: m1Phrases
   }
 };
 
