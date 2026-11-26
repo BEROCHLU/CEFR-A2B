@@ -267,8 +267,57 @@ let bookmarkRenderVersion = 0;
 // ========================================================
 // 音声認識 (Web Speech API / en-US)
 // ========================================================
+// iOS WebKit populates getVoices() lazily, causing the 1st and 2nd+ playbacks to use different voices;
+// keeping utterance.voice unset lets iOS consistently use its default en-US voice.
+const isIOS =
+  typeof navigator !== 'undefined' &&
+  (/iP(hone|ad|od)/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
+type BrowserAudioSessionType = 'auto' | 'playback' | 'transient' | 'transient-solo' | 'ambient' | 'play-and-record';
+type NavigatorWithAudioSession = Navigator & { audioSession?: { type: BrowserAudioSessionType } };
+
 let recognitionInstance: any = null;
 let isListening = false;
+let audioSessionResetTimer: number | null = null;
+let stopFallbackTimer: number | null = null;
+
+function setIOSAudioSessionType(type: BrowserAudioSessionType): void {
+  if (!isIOS || typeof navigator === 'undefined') return;
+  const session = (navigator as NavigatorWithAudioSession).audioSession;
+  if (!session) return;
+  try {
+    session.type = type;
+  } catch {
+    // Ignore unsupported session type transitions
+  }
+}
+
+function clearAudioSessionResetTimer(): void {
+  if (audioSessionResetTimer !== null) {
+    window.clearTimeout(audioSessionResetTimer);
+    audioSessionResetTimer = null;
+  }
+}
+
+function clearStopFallbackTimer(): void {
+  if (stopFallbackTimer !== null) {
+    window.clearTimeout(stopFallbackTimer);
+    stopFallbackTimer = null;
+  }
+}
+
+// Nudge iOS AVAudioSession away from a potentially stuck recording category without emitting sound.
+function resetIOSAudioSessionAfterRecognition(): void {
+  clearAudioSessionResetTimer();
+  setIOSAudioSessionType('playback');
+  audioSessionResetTimer = window.setTimeout(() => {
+    audioSessionResetTimer = null;
+    if (!recognitionInstance) {
+      setIOSAudioSessionType('auto');
+    }
+  }, 50);
+}
 
 function resetSpeechRecognitionUI(): void {
   isListening = false;
@@ -278,19 +327,36 @@ function resetSpeechRecognitionUI(): void {
   }
 }
 
+function finishSpeechRecognition(recognition: any, abort = false): void {
+  clearStopFallbackTimer();
+  if (recognitionInstance === recognition) {
+    recognitionInstance = null;
+  }
+  if (abort) {
+    abortRecognition(recognition);
+  }
+  resetSpeechRecognitionUI();
+  resetIOSAudioSessionAfterRecognition();
+}
+
 function stopSpeechRecognition(graceful = false): void {
+  clearStopFallbackTimer();
   if (recognitionInstance) {
     const recognition = recognitionInstance;
     if (graceful) {
       try {
         recognition.stop();
+        stopFallbackTimer = window.setTimeout(() => {
+          stopFallbackTimer = null;
+          if (recognitionInstance === recognition) {
+            finishSpeechRecognition(recognition, true);
+          }
+        }, 700);
       } catch {
-        recognitionInstance = null;
-        abortRecognition(recognition);
+        finishSpeechRecognition(recognition, true);
       }
     } else {
-      recognitionInstance = null;
-      abortRecognition(recognition);
+      finishSpeechRecognition(recognition, true);
     }
   }
   resetSpeechRecognitionUI();
@@ -305,6 +371,8 @@ function startSpeechRecognition(): void {
 
   stopSpeechRecognition();
   stopSpeechSynthesis();
+  clearAudioSessionResetTimer();
+  setIOSAudioSessionType('play-and-record');
 
   try {
     const recognition = new SpeechRecognitionClass();
@@ -337,15 +405,13 @@ function startSpeechRecognition(): void {
     recognition.onend = () => {
       if (recognitionInstance !== recognition) return;
       // Avoid calling abort() after natural end/error, which can destabilize WebKit's audio session.
-      recognitionInstance = null;
-      resetSpeechRecognitionUI();
+      finishSpeechRecognition(recognition);
       elUserInput.focus();
     };
 
     recognition.onerror = (event: any) => {
       if (recognitionInstance !== recognition) return;
-      recognitionInstance = null;
-      resetSpeechRecognitionUI();
+      finishSpeechRecognition(recognition);
       if (event.error === 'not-allowed') {
         alert(recognitionErrorMessage('not-allowed'));
       }
@@ -384,18 +450,13 @@ function stopSpeechSynthesis(): void {
   elBtnSpeakModel?.classList.remove('speaking');
 }
 
-// iOS WebKit populates getVoices() lazily, causing the 1st and 2nd+ playbacks to use different voices;
-// keeping utterance.voice unset lets iOS consistently use its default en-US voice.
-const isIOS =
-  typeof navigator !== 'undefined' &&
-  (/iP(hone|ad|od)/.test(navigator.userAgent) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
-
 function speakEnglishText(text: string): void {
   const trimmed = text.trim();
   if (!trimmed || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
 
   stopSpeechRecognition();
+  clearAudioSessionResetTimer();
+  setIOSAudioSessionType('auto');
   window.speechSynthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(trimmed);
