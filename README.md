@@ -1,5 +1,8 @@
 # CEFR A2-B English Composition
 
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-blue)](./LICENSE)
+[![GitHub Actions: Deploy](https://github.com/BEROCHLU/cefr-a2b/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/BEROCHLU/cefr-a2b/actions/workflows/deploy.yml)
+
 An interactive Japanese-to-English composition trainer designed for mastering practical English grammar and phrasing at the CEFR A2–B levels. Powered by the **OpenAI Responses API**, it provides flexible semantic grading, spoiler-free hints for retries, natural alternative phrasings, voice input and audio playback via the Web Speech API, and multi-turn AI coaching.
 
 > **Note:** The application UI, source prompts, and coaching explanations are written in Japanese for Japanese speakers learning English.
@@ -10,11 +13,12 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 
 ## Key Features
 
-- **Curated Grammar Datasets (559 Prompts Total)**
+- **Curated Grammar Datasets (810 Prompts Total)**
   - **基礎 / Basic**: 240 foundational prompts organized by grammatical structure.
   - **基礎・追加 / Basic Extra**: 100 supplementary foundational prompts for additional practice.
   - **標準 / Standard**: 152 core prompts covering relative pronouns/adverbs, participles, causative/perception verbs, infinitive constructions, and indirect questions.
   - **標準・追加 / Standard Extra**: 67 supplementary prompts for extended practice.
+  - **発展 / Advanced**: 251 prompts covering advanced constructions such as conditionals, comparisons, concession, and inversion.
 - **Category-Clustered Scheduling**
   - Automatically groups up to 4 uncompleted prompts from the same grammatical category in a row to reinforce structural patterns before switching to a new random category.
 - **Flexible, Spoiler-Free AI Evaluation**
@@ -47,7 +51,7 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 cefr-a2b/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml             # Manual FTPS deployment workflow (GitHub Actions)
+│       └── deploy.yml             # FTPS deployment on main pushes and manual runs
 ├── index.html                     # Application entry HTML
 ├── prompt/
 │   ├── system.md                  # System prompt for composition evaluation
@@ -68,7 +72,8 @@ cefr-a2b/
 │   │   ├── phrases-u2.ts          # Basic dataset (240 items)
 │   │   ├── phrases-u2-extra.ts    # Basic Extra dataset (100 items)
 │   │   ├── phrases-u3.ts          # Standard dataset (152 items)
-│   │   └── phrases-u3-extra.ts    # Standard Extra dataset (67 items)
+│   │   ├── phrases-u3-extra.ts    # Standard Extra dataset (67 items)
+│   │   └── phrases-m1.ts          # Advanced dataset (251 items)
 │   └── utils/
 │       └── speechRecognition.ts   # Web Speech API wrapper & LCS comparison logic
 ├── package.json
@@ -80,7 +85,7 @@ cefr-a2b/
 
 ## Prerequisites
 
-- **Node.js** (v22.12+ or v24+ recommended) & **npm**
+- **Node.js** (v22.12+) 
 - **PHP 8.5** (with `curl` and `mbstring` extensions enabled)
 - An **OpenAI API key**
 

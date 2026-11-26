@@ -97,7 +97,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 15,
-        "text": "来年から物価がさらに上がると予想されている。",
+        "text": "来年に物価がさらに上がると予想されている。",
         "answer": "It is expected that prices will rise even higher next year."
       }
     ]
@@ -127,7 +127,7 @@ export const phrases: CategoryGroup[] = [
     "items": [
       {
         "id": 19,
-        "text": "彼が仕事を辞めたとは驚きだと思った。",
+        "text": "彼が仕事を辞めたと知って驚いた。",
         "answer": "I found it surprising that he had quit his job."
       },
       {
@@ -407,7 +407,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 62,
-        "text": "彼女が怒るのも無理はない。",
+        "text": "彼女が怒る可能性は十分にある。",
         "answer": "She may well get angry."
       }
     ]
@@ -542,7 +542,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 82,
-        "text": "誰かを起こさないように、彼女は静かに歩いた。",
+        "text": "誰も起こさないように、彼女は静かに歩いた。",
         "answer": "She walked quietly so as not to wake anyone up."
       },
       {
@@ -762,7 +762,7 @@ export const phrases: CategoryGroup[] = [
     "items": [
       {
         "id": 115,
-        "text": "私は会議に出席できなかったことを謝った。",
+        "text": "私は会議に出席しなかったことを謝った。",
         "answer": "I apologized for not attending the meeting."
       },
       {
@@ -912,7 +912,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 138,
-        "text": "もしもっと一生懸命勉強していたら、彼は大学に受かっていただろう。",
+        "text": "もしもっと一生懸命勉強していたら、彼は大学の試験に合格しただろう。",
         "answer": "If he had studied harder, he would have passed the university exam."
       },
       {
@@ -1032,7 +1032,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 156,
-        "text": "彼があんなに話すのを聞くと、先生だと思うだろう。",
+        "text": "彼があんなふうに話すのを聞くと、先生だと思うだろう。",
         "answer": "To hear him talk like that, you would think he was a teacher."
       },
       {
@@ -1218,7 +1218,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 184,
         "text": "この部屋は前の部屋より2倍広い。",
-        "answer": "This room is twice larger than my previous one."
+        "answer": "This room is twice as large as the previous one."
       }
     ]
   },
@@ -1288,7 +1288,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 194,
         "text": "どんなにお金持ちの人でも、時間は買えない。",
-        "answer": "The richest man cannot buy time."
+        "answer": "No matter how rich you are, you can't buy time."
       },
       {
         "id": 195,
@@ -1318,7 +1318,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 199,
         "text": "毎日水をやりなさい、そうしないと花は枯れてしまいますよ。",
-        "answer": "Water the flowers every day, otherwise they will die."
+        "answer": "Water the flowers every day, or they will die."
       }
     ]
   },
@@ -1477,7 +1477,7 @@ export const phrases: CategoryGroup[] = [
       },
       {
         "id": 223,
-        "text": "「コーヒーはいくら残っていますか」「まったく残っていません」",
+        "text": "「コーヒーはどのくらい残っていますか」「まったく残っていません」",
         "answer": "\"How much coffee is left?\" \"None.\""
       }
     ]
@@ -1663,7 +1663,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 251,
         "text": "彼と別れて初めて、彼がどれほど大切だったかに気づいた。",
-        "answer": "Only after leaving him did I realize how important he was."
+        "answer": "Only after we broke up did I realize how much he meant to me."
       }
     ]
   }
