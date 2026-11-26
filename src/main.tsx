@@ -270,16 +270,30 @@ let bookmarkRenderVersion = 0;
 let recognitionInstance: any = null;
 let isListening = false;
 
-function stopSpeechRecognition(): void {
-  if (recognitionInstance) {
-    abortRecognition(recognitionInstance);
-    recognitionInstance = null;
-  }
+function resetSpeechRecognitionUI(): void {
   isListening = false;
   if (elBtnMic) {
     elBtnMic.classList.remove('recording');
     elBtnMic.title = '音声入力 (英語)';
   }
+}
+
+function stopSpeechRecognition(graceful = false): void {
+  if (recognitionInstance) {
+    const recognition = recognitionInstance;
+    if (graceful) {
+      try {
+        recognition.stop();
+      } catch {
+        recognitionInstance = null;
+        abortRecognition(recognition);
+      }
+    } else {
+      recognitionInstance = null;
+      abortRecognition(recognition);
+    }
+  }
+  resetSpeechRecognitionUI();
 }
 
 function startSpeechRecognition(): void {
@@ -298,7 +312,17 @@ function startSpeechRecognition(): void {
     recognition.continuous = false;
     recognition.interimResults = true;
 
+    recognition.onstart = () => {
+      if (recognitionInstance !== recognition) return;
+      isListening = true;
+      if (elBtnMic) {
+        elBtnMic.classList.add('recording');
+        elBtnMic.title = '音声認識中... クリックで停止';
+      }
+    };
+
     recognition.onresult = (event: any) => {
+      if (recognitionInstance !== recognition) return;
       const results = event.results;
       let text = '';
       for (let i = 0; i < results.length; i++) {
@@ -311,23 +335,23 @@ function startSpeechRecognition(): void {
     };
 
     recognition.onend = () => {
-      stopSpeechRecognition();
+      if (recognitionInstance !== recognition) return;
+      // Avoid calling abort() after natural end/error, which can destabilize WebKit's audio session.
+      recognitionInstance = null;
+      resetSpeechRecognitionUI();
       elUserInput.focus();
     };
 
     recognition.onerror = (event: any) => {
-      stopSpeechRecognition();
+      if (recognitionInstance !== recognition) return;
+      recognitionInstance = null;
+      resetSpeechRecognitionUI();
       if (event.error === 'not-allowed') {
         alert(recognitionErrorMessage('not-allowed'));
       }
     };
 
     recognitionInstance = recognition;
-    isListening = true;
-    if (elBtnMic) {
-      elBtnMic.classList.add('recording');
-      elBtnMic.title = '音声認識中... クリックで停止';
-    }
     recognition.start();
   } catch (e) {
     stopSpeechRecognition();
@@ -341,7 +365,7 @@ if (elBtnMic) {
   } else {
     elBtnMic.addEventListener('click', () => {
       if (isListening) {
-        stopSpeechRecognition();
+        stopSpeechRecognition(true);
       } else {
         startSpeechRecognition();
       }
@@ -350,7 +374,11 @@ if (elBtnMic) {
 }
 
 function stopSpeechSynthesis(): void {
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+  if (
+    typeof window !== 'undefined' &&
+    'speechSynthesis' in window &&
+    (window.speechSynthesis.speaking || window.speechSynthesis.pending)
+  ) {
     window.speechSynthesis.cancel();
   }
   elBtnSpeakModel?.classList.remove('speaking');

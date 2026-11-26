@@ -98,7 +98,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 15,
         "text": "来年に物価がさらに上がると予想されている。",
-        "answer": "It is expected that prices will rise even higher next year."
+        "answer": "Prices are predicted to rise further next year."
       }
     ]
   },

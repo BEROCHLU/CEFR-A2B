@@ -6,6 +6,7 @@ export interface PhraseRecognition {
   lang: string;
   continuous: boolean;
   interimResults: boolean;
+  onstart?: (() => void) | null;
   onresult: ((event: { results: ArrayLike<RecognitionResult> }) => void) | null;
   onend: (() => void) | null;
   onerror: ((event: { error: string }) => void) | null;
@@ -29,6 +30,7 @@ export function getSpeechRecognition() {
 // 安全な停止（リスナーを外してから中断してゾンビイベントを防ぐ）
 export function abortRecognition(recognition: PhraseRecognition | null) {
   if (!recognition) return;
+  recognition.onstart = null;
   recognition.onresult = null;
   recognition.onend = null;
   recognition.onerror = null;
