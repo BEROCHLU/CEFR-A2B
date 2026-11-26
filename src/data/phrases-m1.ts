@@ -1663,7 +1663,7 @@ export const phrases: CategoryGroup[] = [
       {
         "id": 251,
         "text": "彼と別れて初めて、彼がどれほど大切だったかに気づいた。",
-        "answer": "Only after we broke up did I realize how much he meant to me."
+        "answer": "Only after we broke up did I realize how important he was."
       }
     ]
   }
