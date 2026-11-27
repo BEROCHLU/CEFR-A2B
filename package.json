@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "concurrently -n vite,php -c cyan,magenta \"vite\" \"node scripts/dev-php.js\"",
     "dev:vite": "vite",
-    "dev:php": "node scripts/dev-php.js",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

@@ -24,8 +24,9 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
 - **Flexible, Spoiler-Free AI Evaluation**
   - Uses OpenAI Structured Outputs (`json_schema`) to classify answers into `pass`, `close`, or `fail`.
   - Accepts natural, idiomatic, and conversational English equivalents beyond rigid textbook answers.
-  - **Strict Spoiler Prevention**: When an answer is `close` or `fail`, both the system prompt and backend enforce hiding the model answer and full translations—providing concise grammatical hints so learners can self-correct.
-  - Displays the reference answer (with one-click audio pronunciation playback), a natural CEFR A2–B2 alternative expression (when applicable), and one-point feedback upon passing with an instant **Repeat (`↺ もう一度`)** button, plus a one-click **Pass (`パス`)** button while answering to mark already-mastered prompts as completed and advance.
+  - **Spoiler-Free Feedback**: When an answer is `close` or `fail`, the evaluation gives concise grammatical hints and withholds the model answer and full translations so learners can self-correct.
+  - The **Show Answer (`解答`)** button fills the editable input with the current prompt’s model answer. Learners can then submit it for evaluation.
+  - Upon passing, the app displays the reference answer with audio playback, a natural CEFR A2–B2 alternative when available, one-point feedback, and a **Repeat (`↺ もう一度`)** button.
 - **Stateful Multi-Turn AI Coach Q&A & Bookmarks**
   - Ask follow-up questions about nuances, word choices, or custom sentences directly within each prompt.
   - Maintains multi-turn conversation and reasoning context via OpenAI's `previous_response_id` and automatic context compaction, rendered cleanly in Markdown.
@@ -159,7 +160,6 @@ Vite compiles TypeScript and bundles static assets—alongside `public/api.php` 
 | :--- | :--- |
 | `npm run dev` | Starts Vite (`:5173`) and the PHP built-in server (`:8000`) concurrently |
 | `npm run dev:vite` | Starts only the Vite frontend server |
-| `npm run dev:php` | Starts only the PHP built-in server on port `8000` |
 | `npm run build` | Type-checks with `tsc` and builds production assets into `dist/` |
 | `npm run preview` | Previews the production frontend build locally |
 
