@@ -54,9 +54,14 @@
           <button id="btn-next" class="btn-next hidden">
             <span>次の問題へ ➔</span>
           </button>
-          <button id="btn-answer" class="btn-secondary" type="button" title="模範解答を入力欄に表示します">
-            <span>解答</span>
-          </button>
+          <div id="answer-actions" class="answer-actions">
+            <button id="btn-skip" class="btn-secondary" type="button" title="この問題を飛ばして次へ進みます">
+              <span>パス</span>
+            </button>
+            <button id="btn-answer" type="button" title="模範解答を入力欄に表示します">
+              <span>解答</span>
+            </button>
+          </div>
 
           <button id="btn-mic" class="btn-mic" type="button" title="音声入力 (英語)" aria-label="音声入力 (英語)">
             <svg class="mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

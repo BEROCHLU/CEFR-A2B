@@ -333,7 +333,12 @@ button:active {
   background-color: #475569;
 }
 
-#btn-answer {
+.answer-actions {
+  display: flex;
+  gap: inherit;
+}
+
+.answer-actions button {
   width: 44px;
   height: 44px;
   min-width: 44px;
@@ -342,6 +347,15 @@ button:active {
   font-size: 0.85rem;
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+#btn-answer {
+  background-color: #6d4c8d;
+  color: #fff;
+}
+
+#btn-answer:hover:not(:disabled) {
+  background-color: #5a3d76;
 }
 
 .btn-clear {

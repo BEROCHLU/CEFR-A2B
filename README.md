@@ -25,6 +25,7 @@ An interactive Japanese-to-English composition trainer designed for mastering pr
   - Uses OpenAI Structured Outputs (`json_schema`) to classify answers into `pass`, `close`, or `fail`.
   - Accepts natural, idiomatic, and conversational English equivalents beyond rigid textbook answers.
   - **Spoiler-Free Feedback**: When an answer is `close` or `fail`, the evaluation gives concise grammatical hints and withholds the model answer and full translations so learners can self-correct.
+  - The **Pass (`パス`)** button skips the current prompt. Uncompleted prompts can appear again later.
   - The **Show Answer (`解答`)** button fills the editable input with the current prompt’s model answer. Learners can then submit it for evaluation.
   - Upon passing, the app displays the reference answer with audio playback, a natural CEFR A2–B2 alternative when available, one-point feedback, and a **Repeat (`↺ もう一度`)** button.
 - **Stateful Multi-Turn AI Coach Q&A & Bookmarks**
